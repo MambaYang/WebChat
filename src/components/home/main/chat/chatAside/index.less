@@ -1,0 +1,61 @@
+
+.aside-box{
+    .ant-list , .ant-spin-nested-loading,.ant-spin-container{
+        height: 100%;
+    }
+    .ant-list-item{
+        padding: 0;
+    }
+    .ant-list-items{
+        // height: 690px;
+        height: 100%;
+        overflow: auto;
+        overflow-y: overlay;
+        color: rgba(0, 0, 0, 0);
+        -webkit-text-fill-color: black;
+        transition: color .5s ease;
+    }
+    // 自定义滚动条样式
+
+
+    .ant-list-items:hover {
+        color: rgba(0, 0, 0, 0.3);
+    }
+
+
+    .ant-list-item:hover{
+        background-color: rgb(200, 200, 200);
+    }
+    .ant-list-item-meta{
+        // background-color: yellow;
+        height: 70px;
+        padding: 0 10px;
+        align-items:center;
+        .ant-list-item-meta-description{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-text-fill-color: #848484;
+        }
+        .ant-list-item-meta-title{
+            display: flex;
+            justify-content: space-between;
+            span:first-child{
+                max-width: 130px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            span:last-child{
+                font-size: 12px;
+                transform: scale(0.9);
+                -webkit-text-fill-color: #848484;
+            }
+        }
+        .ant-list-item-meta-avatar{
+            margin-right: 7px;
+        }
+        
+    }
+
+}

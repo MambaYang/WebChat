@@ -1,0 +1,109 @@
+.main-box{
+    .main-header{
+        min-height: 60px;
+        padding: 10px 20px;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        .header-item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        border-bottom: 1px solid @my-border-color;
+
+    }
+    .main-content{
+        display: flex;
+        flex: 1;
+        min-height: 0px;
+        .Chat-message-list{
+            margin: 0;
+            flex: 1;
+            overflow: auto;
+            overflow-y: overlay;
+            color: rgba(0, 0, 0, 0);
+            -webkit-text-fill-color: black;
+            transition: color .5s ease;
+            li{
+                padding: 0 10px 20px;
+            }
+            li:first-child{
+                margin-top: 20px;
+            }
+            .message-bubble{
+                width: 100%;
+                display: flex;
+                padding-bottom: 5px;
+                .message-area{
+                    padding: 0 8px;
+                    .content{
+                        padding: 10px;
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: #000000;
+                        letter-spacing: 0;
+                        word-wrap: break-word;
+                        word-break: break-all;
+                        .text-box{
+                            white-space: pre-wrap;
+                        }
+                    }
+                    .content-out{
+                        background: #dceafd;
+                        border-radius: 10px 0px 10px 10px;
+                    }
+                    .content-in{
+                        background: #dceafd;
+                        border-radius: 10px 10px 10px 0px;
+                    }
+                }
+                .message-label {
+                    align-self: flex-end;
+                    font-family: PingFangSC-Regular;
+                    font-weight: 400;
+                    font-size: 12px;
+                    -webkit-text-fill-color: #a2a4a6;
+                    word-break: keep-all;
+                }
+            }
+            .reverse {
+                flex-direction: row-reverse;
+                justify-content: flex-start;
+            }
+        }
+        .Chat-message-list:hover{
+            color: rgba(0, 0, 0, 0.3);
+        }
+    }
+    .main-footer{
+        height: 200px;
+        min-height: 100px;
+        border: 1px solid @my-border-color;
+        .input-box{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .input-header{
+                padding: 8px;
+                span{
+                    margin-right: 10px;
+                }
+            }
+            .input-area{
+                flex: 1;
+                overflow: auto;
+                overflow-y: overlay;
+                color: rgba(0, 0, 0, 0);
+                -webkit-text-fill-color: black;
+                transition: color .5s ease;
+                .ant-input{
+                    padding: 0 14px;
+                }
+            }
+            .input-area:hover{
+                color: rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+}
