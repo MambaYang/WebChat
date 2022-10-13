@@ -1,5 +1,38 @@
 
 .aside-box{
+    .aside-header-box{
+        position: relative;
+        .search-dialog{
+            background-color: rgb(244, 244, 244);
+            box-shadow:0 0 5px rgb(166, 166, 166);
+            border-radius: 0 0 5px 5px;
+            width: 100%;
+            position: absolute;
+            top: 32px;
+            z-index: 99;
+            ul{
+                margin: 0;
+            }
+            li{
+                font-size: 14px;
+                line-height: 14px;
+                padding: 10px;
+                span:first-child{
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+                    border-radius: 5px;
+                    background-color: #fff;
+                }
+                cursor: pointer;
+
+            }
+            li:hover{
+                background-color: #b1b1b1;
+            }
+        }
+    }
+
     .ant-list , .ant-spin-nested-loading,.ant-spin-container{
         height: 100%;
     }
@@ -12,12 +45,10 @@
         overflow: auto;
         overflow-y: overlay;
         color: rgba(0, 0, 0, 0);
-        -webkit-text-fill-color: black;
+        -webkit-text-fill-color: rgb(50, 50, 50);
         transition: color .5s ease;
     }
     // 自定义滚动条样式
-
-
     .ant-list-items:hover {
         color: rgba(0, 0, 0, 0.3);
     }

@@ -19,6 +19,61 @@
     width: 40px;
     height: 40px;
     margin: 80px auto 20px;
+    position: relative;
+    .avatar-dialog{
+        background-color:rgba(253, 253, 253);
+        border: 1px solid @my-border-color;
+        border-radius: 5px;
+        box-shadow: 0 0 5px @my-border-color;
+        width: 300px;
+        height: 200px;
+        padding: 20px;
+        position: absolute;
+        left: 50px;
+        top: 0;
+        z-index: 99;
+        .avatar-dialog-header{
+            display: flex;
+            margin-bottom: 20px;
+            .dialog-avatar{
+                width: 50px;
+                height: auto;
+                margin-right: 10px;
+            }
+            .dialog-info{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                span:first-child{
+                    font-size: 20px;
+                }
+                span:last-child{
+                    font-size: 14px;
+                    color: rgb(160, 160, 160);
+                }
+            }
+        }
+        .avatar-dialog-menu{
+            // background-color: aqua;
+            ul{
+                width: 100%;
+                li{
+                    width: 100%;
+                    height: 45px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    text-align: center;
+                    line-height: 45px;
+                    cursor: pointer;
+                }
+                li:hover{
+                    background-color: rgba(234, 234, 234, 0.5);
+                }
+            }
+        }
+
+    }
+
 }
 .avatar span{
     width: 100%;

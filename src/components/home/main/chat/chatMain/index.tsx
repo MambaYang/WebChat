@@ -1,9 +1,16 @@
 import { EllipsisOutlined } from "@ant-design/icons"
-import { Avatar, Input } from "antd"
+import { Avatar, Button, Divider, Input, InputRef, Popover } from "antd"
+import { useEffect, useRef } from "react"
 import MyIcon from "../../../../../assets/MyIcon"
 import "./index.less"
 const { TextArea } = Input
 function ChatContent() {
+    const inputRef = useRef<InputRef>(null)
+    useEffect(() => {
+        inputRef.current.focus({
+            cursor: "end",
+        })
+    })
     return (
         <>
             <header className="main-header">
@@ -174,17 +181,23 @@ function ChatContent() {
             <footer className="main-footer">
                 <div className="input-box">
                     <div className="input-header">
-                        <MyIcon
-                            type="icon-emoji"
-                            style={{ fontSize: "32px" }}
-                        />
+                        <Popover content={<div>表情</div>} trigger="click">
+                            <MyIcon
+                                type="icon-emoji"
+                                style={{ fontSize: "32px" }}
+                            />
+                        </Popover>
                         <MyIcon
                             type="icon-record"
                             style={{ fontSize: "32px" }}
                         />
                     </div>
                     <div className="input-area">
-                        <TextArea autoSize={{ minRows: 1 }} bordered={false} />
+                        <TextArea
+                            autoSize={{ minRows: 1 }}
+                            bordered={false}
+                            ref={inputRef}
+                        />
                     </div>
                 </div>
             </footer>

@@ -1,5 +1,6 @@
-import { PlusOutlined, SearchOutlined } from "@ant-design/icons"
-import { Button, Input, Avatar, List, Divider } from "antd"
+import { SearchOutlined } from "@ant-design/icons"
+import { Input, Avatar, List } from "antd"
+import { useState } from "react"
 import "./index.less"
 const data = [
     {
@@ -49,26 +50,49 @@ const data = [
     },
 ]
 function ChatAside() {
+    const [isShowDialog, setShowDialog] = useState<boolean>(false)
     return (
         <>
             <header className="aside-header">
-                <div>
+                <div className="aside-header-box">
                     <Input
                         placeholder="搜索已添加好友"
                         prefix={<SearchOutlined />}
                         size="middle"
                         style={{ width: "200px" }}
+                        onFocus={() => setShowDialog(true)}
+                        onBlur={() => setShowDialog(false)}
                     />
+                    {isShowDialog && (
+                        <>
+                            <div className="search-dialog">
+                                <ul>
+                                    <li>
+                                        <Avatar
+                                            shape="square"
+                                            src="https://joeschmoe.io/api/v1/random"
+                                        />
+                                        <span>昵称1</span>
+                                    </li>
+                                    <li>
+                                        <Avatar src="https://joeschmoe.io/api/v1/random" />
+                                        <span>昵称2</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="dialog-shade"></div>
+                        </>
+                    )}
                 </div>
 
-                <div>
+                {/* <div>
                     <Button
                         type="primary"
-                        icon={<PlusOutlined />}
+                        icon={<SearchOutlined />}
                         href="https://www.google.com"
                         size="small"
                     />
-                </div>
+                </div> */}
             </header>
             <main className="aside-main">
                 <List
