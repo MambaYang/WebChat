@@ -1,16 +1,27 @@
 import { EllipsisOutlined } from "@ant-design/icons"
-import { Avatar, Button, Divider, Input, InputRef, Popover } from "antd"
-import { useEffect, useRef } from "react"
+import { Avatar, Input, InputRef, Popover } from "antd"
+
+import { useEffect, useRef, useState } from "react"
+
 import MyIcon from "../../../../../assets/MyIcon"
+import Emoji from "./emoji"
 import "./index.less"
 const { TextArea } = Input
+
 function ChatContent() {
     const inputRef = useRef<InputRef>(null)
-    useEffect(() => {
+    const [areaValue, setareaValue] = useState<string>("")
+    const [emojiOpen, setOpen] = useState<boolean>(false)
+
+    const onFocus = () => {
         inputRef.current.focus({
-            cursor: "end",
+            preventScroll: true,
         })
+    }
+    useEffect(() => {
+        onFocus()
     })
+
     return (
         <>
             <header className="main-header">
@@ -181,22 +192,46 @@ function ChatContent() {
             <footer className="main-footer">
                 <div className="input-box">
                     <div className="input-header">
-                        <Popover content={<div>表情</div>} trigger="click">
+                        {/* 表情气泡卡 */}
+                        <Popover
+                            content={
+                                <Emoji
+                                    areaValue={areaValue}
+                                    setValue={setareaValue}
+                                    setOpen={setOpen}
+                                    inputRef={inputRef}
+                                />
+                            }
+                            trigger="click"
+                            open={emojiOpen}
+                            onOpenChange={(newOpen: boolean) => {
+                                setOpen(newOpen)
+                            }}
+                        >
                             <MyIcon
                                 type="icon-emoji"
                                 style={{ fontSize: "32px" }}
                             />
                         </Popover>
+                        {/* 聊天记录 */}
                         <MyIcon
                             type="icon-record"
                             style={{ fontSize: "32px" }}
                         />
                     </div>
-                    <div className="input-area">
+                    <div className="input-area" id="area">
                         <TextArea
-                            autoSize={{ minRows: 1 }}
                             bordered={false}
                             ref={inputRef}
+                            autoSize={{ minRows: 7 }}
+                            value={areaValue}
+                            onChange={(e) => {
+                                setareaValue(e.target.value)
+                            }}
+                            onPressEnter={(e) => {
+                                // e.preventDefault()
+                                console.log("发送:" + areaValue)
+                            }}
                         />
                     </div>
                 </div>

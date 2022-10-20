@@ -7,7 +7,16 @@ function Chat() {
             <div className="aside-box">
                 <ChatAside />
             </div>
-            <div className="main-box">
+            <div
+                className="main-box"
+                // onMouseDown={(
+                //     e: React.MouseEvent<HTMLDivElement, MouseEvent>
+                // ) => {
+                //     if (e.target !== areaDom) {
+                //         e.preventDefault()
+                //     }
+                // }}
+            >
                 <ChatMain />
             </div>
         </>
