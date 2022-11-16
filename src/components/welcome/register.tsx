@@ -7,7 +7,7 @@ import {
 import { Button, Checkbox, Form, Input, InputRef, message } from "antd"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import type { registerSubmitVal, resErrorType } from "../../types"
+import type { registerSubmitVal, resErrorType } from "../../@types"
 import { $Req_addUser, api_insertEmojiUrlArray, auth } from "../../api"
 import { IMLogin } from "../../api/TIM"
 import genTestUserSig from "../../assets/UserSig"

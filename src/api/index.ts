@@ -4,7 +4,7 @@ import axios from "axios"
 import genTestUserSig from "../assets/UserSig"
 
 const app = cloudbase.init({
-    env: "mamba-3giisytd4efcf526",
+    env: "mamba-3giisytd4efcf526", // 腾讯云开发id
     // clientId: "AAU5PwABb7WUWvYbTDQ", // 应用ID
 })
 export const auth: any = app.auth({

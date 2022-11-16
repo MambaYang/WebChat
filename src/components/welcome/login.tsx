@@ -13,7 +13,7 @@ import {
 import { message, Tabs } from "antd"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import type { loginSubmitVal, resErrorType } from "../../types"
+import type { loginSubmitVal, resErrorType } from "../../@types"
 import { auth } from "../../api"
 import genTestUserSig from "../../assets/UserSig"
 import "./login.less"
