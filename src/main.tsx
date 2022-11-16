@@ -1,12 +1,12 @@
 import ReactDOM from "react-dom/client"
-import Bmob from "hydrogen-js-sdk"
-import { RouterProvider } from "react-router-dom"
-import router from "./router"
 import "antd/dist/antd.less"
+import App from "./App"
+import store from "./store"
+import { Provider } from "react-redux"
 
-Bmob.initialize("32d0f36ca7d67728", "051614")
-Bmob.debug(true) // 开启调试模式
-
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <RouterProvider router={router} />
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
+root.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
 )

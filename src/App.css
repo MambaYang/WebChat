@@ -11,7 +11,12 @@ li {
 }
 
 #root {
-    background-color: rgba(247, 247, 225, 0.581);
+    /* background-color: rgba(247, 247, 225, 0.581); */
+    background: linear-gradient(
+        to bottom right,
+        rgb(189, 254, 255),
+        rgb(255, 227, 203)
+    );
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -20,6 +25,7 @@ li {
     width: 100vw;
     height: 100vh;
     display: flex;
+    overflow: hidden;
 }
 
 .ant-pro .ant-pro-layout .ant-pro-sider-fixed {

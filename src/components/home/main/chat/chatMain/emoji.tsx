@@ -1,5 +1,15 @@
-import { Tabs } from "antd"
+import { message, Tabs } from "antd"
+import { useEffect, useRef, useState } from "react"
 import * as unicodeEmoji from "unicode-emoji"
+import {
+    api_AddEmojiUrl,
+    api_GetEmojiUrl,
+    api_getTempFileURL,
+    api_uploadEmoji,
+} from "../../../../../api"
+import MyIcon from "../../../../../assets/MyIcon"
+import { useAppSelector } from "../../../../../hooks"
+import { selectUserInfo } from "../../../homeSlice"
 const emojiObj = unicodeEmoji.getEmojisGroupedBy("group")
 
 type emojiItemType = {
@@ -12,6 +22,10 @@ type Props = {
     inputRef: any
 }
 function Emoji({ setValue, areaValue, setOpen, inputRef }: Props) {
+    const { userinfo } = useAppSelector(selectUserInfo)
+    const [prevEmoji, setPrevEmoji] = useState([])
+    const [selfEmojiList, setSelfEmojiList] = useState([])
+    const emojiRef = useRef(null)
     // 渲染表情列表
     const emojiItem = (category: string): React.ReactNode => {
         const onClickHandle = (
@@ -26,11 +40,22 @@ function Emoji({ setValue, areaValue, setOpen, inputRef }: Props) {
             // 获取光标位置
             let { selectionStart, selectionEnd } =
                 inputRef.current.resizableTextArea.textArea
-            setValue(
-                areaValue.substr(0, selectionStart) +
-                    val.innerHTML +
-                    areaValue.substr(selectionEnd)
-            )
+
+            if (prevEmoji.includes(selectionStart - 1)) {
+                selectionStart++
+                selectionEnd++
+            }
+
+            const newVal =
+                areaValue.substring(0, selectionStart) +
+                val.innerHTML +
+                areaValue.substring(selectionEnd)
+            const newprevEmoji = prevEmoji.slice()
+            if (!prevEmoji.includes(selectionStart))
+                newprevEmoji.push(selectionStart)
+            setPrevEmoji(newprevEmoji)
+
+            setValue(newVal)
 
             timer = setTimeout(() => {
                 // 移动光标到表情后面
@@ -38,6 +63,7 @@ function Emoji({ setValue, areaValue, setOpen, inputRef }: Props) {
                     ++selectionEnd,
                     selectionEnd
                 )
+                inputRef.current.focus()
             })
             setOpen(false)
         }
@@ -51,6 +77,43 @@ function Emoji({ setValue, areaValue, setOpen, inputRef }: Props) {
             </ul>
         )
     }
+    const selfEmoji = () => {
+        return (
+            <div className="self-emoji-box">
+                <div
+                    onClick={() => {
+                        emojiRef.current.click()
+                    }}
+                >
+                    <MyIcon type="icon-add" style={{ fontSize: "50px" }} />
+                    <input
+                        type="file"
+                        ref={emojiRef}
+                        onChange={async (e) => {
+                            const res = await api_uploadEmoji(e.target.files[0])
+                            console.log(res)
+
+                            const url = res.fileID.slice(
+                                res.fileID.indexOf("emoji")
+                            )
+                            const emojiRes = await api_AddEmojiUrl(
+                                url,
+                                userinfo.userID
+                            )
+
+                            message.success("上传表情成功😊")
+                        }}
+                        style={{ display: "none" }}
+                    />
+                </div>
+                {selfEmojiList.map((item: any, index: number) => (
+                    <div key={index}>
+                        <img src={item.tempFileURL} alt="自定义表情" />
+                    </div>
+                ))}
+            </div>
+        )
+    }
     // 配置表情标签页
     const items = [
         {
@@ -59,7 +122,18 @@ function Emoji({ setValue, areaValue, setOpen, inputRef }: Props) {
             children: emojiItem("smileys-emotion"),
         }, // 务必填写 key
         { label: "🍊", key: "food-drink", children: emojiItem("food-drink") },
+        { label: "🫥", key: "self-emoji", children: selfEmoji() },
     ]
+    const getSelfEmojiUrl = async () => {
+        const { data } = await api_GetEmojiUrl(userinfo.userID)
+        if (data.length) {
+            const { fileList } = await api_getTempFileURL(data[0].fileIDs)
+            setSelfEmojiList(fileList)
+        }
+    }
+    useEffect(() => {
+        getSelfEmojiUrl()
+    }, [])
     return <Tabs items={items} tabPosition="bottom" />
 }
 

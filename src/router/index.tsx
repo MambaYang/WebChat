@@ -1,31 +1,34 @@
 import { createBrowserRouter } from "react-router-dom"
+import WelcomeIndex from "../components/welcome/welcome"
 
-import { App, Login, Register, Home, Welcome, Chat, Info } from "./Import"
+import { Login, Register, Home, Welcome, Chat, Info, Rank } from "./Import"
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <App />,
+        path: "home",
+        element: <Home />,
         children: [
             {
-                path: "home",
-                element: <Home />,
-                children: [
-                    {
-                        path: "chat",
-                        element: <Chat />,
-                    },
-                    {
-                        path: "info",
-                        element: <Info />,
-                    },
-                ],
+                path: "chat",
+                element: <Chat />,
+            },
+            {
+                path: "info",
+                element: <Info />,
+            },
+            {
+                path: "rank",
+                element: <Rank />,
             },
         ],
     },
     {
-        path: "welcome",
+        path: "/",
         element: <Welcome />,
         children: [
+            {
+                index: true,
+                element: <WelcomeIndex />,
+            },
             {
                 path: "login",
                 element: <Login />,
